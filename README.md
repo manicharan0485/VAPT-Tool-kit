@@ -27,32 +27,27 @@ vapt-toolkit/
 │   ├── recon/
 │   │   ├── passive_recon.py        # OSINT: WHOIS, DNS, Shodan, crt.sh
 │   │   ├── subdomain_enum.py       # Subdomain enumeration via multiple sources
-│   │   └── tech_fingerprint.py     # Detect web stack (headers, cookies, errors)
+│   │   └── dns_recon.py            # DNS record enumeration
 │   │
 │   ├── scanning/
 │   │   ├── nmap_wrapper.py         # Nmap automation with profile selection
-│   │   ├── port_scanner.py         # Fast async TCP port scanner (no nmap dep)
+│   │   ├── nmap_scanner.py         # Nmap scan runner with XML/JSON output
 │   │   ├── vuln_scanner.py         # CVE lookup via NVD API for detected services
 │   │   └── ssl_checker.py          # TLS/SSL misconfiguration checker
-│   │
-│   ├── exploitation/
-│   │   ├── msf_automation.py       # Metasploit RPC API automation
-│   │   └── web_fuzzer.py           # Directory/parameter fuzzing (ffuf wrapper)
 │   │
 │   ├── reporting/
 │   │   ├── report_generator.py     # HTML pentest report from JSON findings
 │   │   └── cvss_calculator.py      # CVSS v3.1 score calculator
 │   │
 │   └── utils/
-│       ├── scope_validator.py      # Validate targets are in-scope before testing
-│       └── logger.py               # Structured logging for all tools
+│       └── cve_lookup.py           # CVE details from the NVD API
 │
-├── payloads/web/                   # Web testing payloads (XSS, SQLi patterns)
-├── reports/templates/              # HTML report templates
-├── wordlists/                      # Custom wordlists (NOT included — see setup)
-└── docs/
-    ├── SETUP.md
-    └── METHODOLOGY.md
+├── reports/templates/
+│   └── sample_findings.json        # Example findings input for the report generator
+├── docs/
+│   └── LEGAL.md                    # Authorisation and legal notes
+├── DISCLAIMER.md
+└── requirements.txt
 ```
 
 ---
@@ -75,7 +70,7 @@ python scripts/scanning/vuln_scanner.py --input ./reports/nmap_results.json
 python scripts/scanning/ssl_checker.py --target example.com --port 443
 
 # 5. Generate pentest report
-python scripts/reporting/report_generator.py --input ./reports/findings.json --output ./reports/report
+python scripts/reporting/report_generator.py --input ./reports/templates/sample_findings.json --output ./reports/report
 ```
 
 ---
@@ -86,19 +81,16 @@ python scripts/reporting/report_generator.py --input ./reports/findings.json --o
 |------|---------|
 | `passive_recon.py` | WHOIS, DNS enum, crt.sh, Shodan, dork builder |
 | `nmap_wrapper.py` | Nmap profiles: discovery / quick / full / stealth / vuln |
-| `port_scanner.py` | Async TCP scanner — no nmap dependency |
 | `vuln_scanner.py` | Parse nmap XML → NVD API → CVE report |
 | `ssl_checker.py` | Weak protocols, cipher suites, cert expiry, Heartbleed |
-| `msf_automation.py` | Metasploit RPC: search modules, run exploits, collect results |
 | `report_generator.py` | Professional HTML pentest report with CVSS ratings |
 | `cvss_calculator.py` | CVSS v3.1 base score calculator |
-| `scope_validator.py` | Block out-of-scope targets before any test |
 
 ---
 
 ## 📋 Methodology (PTES-based)
 
-1. Pre-engagement → scope validation (`scope_validator.py`)
+1. Pre-engagement → written authorisation and agreed scope (see `docs/LEGAL.md`)
 2. Intelligence Gathering → passive recon (`passive_recon.py`)
 3. Vulnerability Analysis → scanning + CVE lookup
 4. Exploitation → controlled, authorized only
