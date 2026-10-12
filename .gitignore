@@ -1,0 +1,24 @@
+# Reports (may contain sensitive client data)
+reports/*.html
+reports/*.json
+reports/*.pdf
+*.log
+
+# Credentials
+*.key
+api_keys.txt
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Wordlists (too large for git, download separately)
+wordlists/*.txt
+wordlists/*.lst
+
+# OS
+.DS_Store
+Thumbs.db

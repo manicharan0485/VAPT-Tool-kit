@@ -1,0 +1,63 @@
+{
+  "engagement": {
+    "client": "Example Corp GmbH",
+    "scope": ["192.168.1.0/24", "example.com"],
+    "tester": "Manicharan Ravi",
+    "start_date": "2024-01-15",
+    "end_date": "2024-01-19",
+    "report_date": "2024-01-22"
+  },
+  "findings": [
+    {
+      "id": "VAPT-001",
+      "title": "Apache HTTPd 2.4.49 Path Traversal (CVE-2021-41773)",
+      "severity": "CRITICAL",
+      "cvss_score": 9.8,
+      "cvss_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cve": "CVE-2021-41773",
+      "host": "192.168.1.50",
+      "port": 443,
+      "service": "Apache httpd 2.4.49",
+      "description": "A path traversal and remote code execution vulnerability exists in Apache HTTP Server 2.4.49. An attacker can map URLs to files outside the directories configured by Alias-like directives.",
+      "evidence": "curl -v --path-as-is http://192.168.1.50/cgi-bin/.%2e/.%2e/.%2e/.%2e/etc/passwd",
+      "impact": "Unauthenticated remote code execution and arbitrary file read on the web server.",
+      "remediation": "Upgrade Apache HTTP Server to version 2.4.50 or later immediately. Apply vendor security patches.",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2021-41773",
+        "https://httpd.apache.org/security/vulnerabilities_24.html"
+      ]
+    },
+    {
+      "id": "VAPT-002",
+      "title": "Weak TLS 1.0 Protocol Supported",
+      "severity": "HIGH",
+      "cvss_score": 7.4,
+      "cvss_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "cve": "",
+      "host": "192.168.1.50",
+      "port": 443,
+      "service": "HTTPS",
+      "description": "The server supports TLS 1.0, which is deprecated and vulnerable to BEAST and POODLE attacks.",
+      "evidence": "nmap --script ssl-enum-ciphers -p 443 192.168.1.50",
+      "impact": "An attacker in a privileged network position could decrypt TLS-protected traffic.",
+      "remediation": "Disable TLS 1.0 and TLS 1.1. Configure minimum TLS version to TLS 1.2. Prefer TLS 1.3.",
+      "references": ["https://tools.ietf.org/html/rfc8996"]
+    },
+    {
+      "id": "VAPT-003",
+      "title": "Missing HSTS Header",
+      "severity": "MEDIUM",
+      "cvss_score": 5.3,
+      "cvss_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "cve": "",
+      "host": "example.com",
+      "port": 443,
+      "service": "HTTPS",
+      "description": "The web server does not return a Strict-Transport-Security (HSTS) header, allowing downgrade attacks.",
+      "evidence": "curl -I https://example.com | grep -i strict",
+      "impact": "Users may be redirected to HTTP, exposing credentials to interception.",
+      "remediation": "Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+      "references": ["https://owasp.org/www-project-secure-headers/"]
+    }
+  ]
+}
