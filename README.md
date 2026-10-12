@@ -1,7 +1,9 @@
 # 🔍 VAPT Toolkit
 
 > **Personal Vulnerability Assessment & Penetration Testing automation scripts.**  
-> Python + Bash tools built from real-world VAPT engagements — recon, scanning, exploitation assistance, and professional report generation.
+> Python tools for practising a VAPT workflow in authorised lab environments: recon, scanning, CVE lookup and report generation.
+
+> 🧪 **Reference / lab project.** Original practice code written to demonstrate the approach. It is not taken from an employer's codebase. Review and adapt before using it in your own environment.
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
@@ -106,5 +108,5 @@ MIT — For authorized security testing only. See DISCLAIMER.md.
 
 ## 👤 Author
 
-**Manicharan Ravi** — Cloud Security Engineer | VAPT Specialist  
+**Manicharan Ravi** — IT Specialist & Cloud Engineer  
 📍 Mainz, Germany | 🔐 AWS · Azure · GCP · VAPT · Metasploit · Nmap
