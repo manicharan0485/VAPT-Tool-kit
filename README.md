@@ -109,4 +109,5 @@ MIT — For authorized security testing only. See DISCLAIMER.md.
 ## 👤 Author
 
 **Manicharan Ravi** — IT Specialist & Cloud Engineer  
-📍 Mainz, Germany | 🔐 AWS · Azure · GCP · VAPT · Metasploit · Nmap
+📍 Mainz, Germany | 🔐 AWS · Azure · GCP · VAPT · Metasploit · Nmap  
+🌐 [Portfolio](https://manicharan0485.github.io) · [LinkedIn](https://linkedin.com/in/manicharan-ravi)
